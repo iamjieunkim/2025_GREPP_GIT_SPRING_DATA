@@ -38,7 +38,7 @@ public class ConnectionUtil {
             );
 */
 
-            log.info("Connection = {} ", connection);
+            //log.info("Connection = {} ", connection);
 
             return connection;
 
