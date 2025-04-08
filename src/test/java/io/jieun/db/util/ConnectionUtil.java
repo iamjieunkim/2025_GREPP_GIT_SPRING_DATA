@@ -24,7 +24,8 @@ public class ConnectionUtil {
     public static Connection getConnection() {
 
         try {
-            Connection connection = DriverManager.getConnection(
+            //connection을 직접만들어 꺼내오는것 hikariDataSource는 풀에서 꺼내오는 것
+            Connection connection = DriverManager.getConnection( //연결 객체 꺼내오는거구나
                     MysqlDbConnectionConstant.URL
                     , MysqlDbConnectionConstant.USERNAME
                     , MysqlDbConnectionConstant.PASSWORD
