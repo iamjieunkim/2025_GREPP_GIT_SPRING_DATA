@@ -8,6 +8,7 @@ import java.sql.Connection;
 
 @Slf4j
 class ConnectionUtilTests {
+
     @Test
     @DisplayName("Database Connection 테스트")
     void connection_test() throws Exception {
