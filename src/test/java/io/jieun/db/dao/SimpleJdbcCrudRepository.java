@@ -97,12 +97,57 @@ public class SimpleJdbcCrudRepository implements SimpleCrudRepository {
     }
 
     @Override
-    public void update(Member member) {
+    public void update(Member member) throws SQLException{
+
+        String sql = "UPDATE member SET password = ? WHERE member_id = ?";
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try{
+
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, member.getPassword());
+            preparedStatement.setInt(2, member.getMemberId());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e){
+            throw e;
+        } finally {
+            closeConnection(connection, preparedStatement, null);
+        }
 
     }
 
     @Override
-    public void remove(Integer id) {
+    public void remove(Integer id) throws SQLException{
+
+        //데이터를 삭제하는 작업은 고민을 좀 많이 해야 되는 작업
+        //1. Soft Delete 논리적 삭제
+        //2. Hard Delete 물리적 삭제
+
+        String sql = "DELETE FROM member WHERE member_id = ?";
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try{
+
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e){
+            throw e;
+        } finally {
+            closeConnection(connection, preparedStatement, null);
+        }
 
     }
 }
